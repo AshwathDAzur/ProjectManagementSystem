@@ -16,3 +16,12 @@ Initialise the project with typescript
 `npm i @types/express --save-dev` - Install the types for express as the dev only dependency
 
 `npm i ts-node nodemon --save-dev` - Intall nodemon for hot reload
+
+--> Database layer - ORM
+`npm i prisma @prisma/client` - Install prisma and prisma client
+`npx prisma init` Initialise the prisma, this will create a folder in the current directory named prisma
+
+define the models in the schema.prisma file and run the script to create a migration file
+`npx prisma migrate dev --name CreateusersTable` - After this it'll create a folder under prisma named migration and a migration.sql file will be there and the table will be created in the mysql server
+
+--> 
