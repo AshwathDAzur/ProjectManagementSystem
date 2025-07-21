@@ -7,6 +7,8 @@ const app:Express = express();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Root router for handling routes
 app.use('/api',rootRouter);
 
 export const prismaClient = new PrismaClient({
