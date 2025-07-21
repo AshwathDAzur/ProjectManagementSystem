@@ -24,5 +24,11 @@ Initialise the project with typescript
 define the models in the schema.prisma file and run the script to create a migration file
 `npx prisma migrate dev --name CreateusersTable` - After this it'll create a folder under prisma named migration and a migration.sql file will be there and the table will be created in the mysql server
 
+Any time you modify the schema, you must run `npx prisma generate` again.
+
 --> Environment variables
 `npm i dotenv`
+
+--> To implement authorization
+    bcrypt and jsonwebtoken - `npm i bcrypt jsonwebtoken`
+    `npm i --save-dev @types/bcrypt`

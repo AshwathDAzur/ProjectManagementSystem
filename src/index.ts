@@ -1,10 +1,16 @@
-import express, {Express, Response, Request}  from "express";
+import express, {Express}  from "express";
 import { PORT } from "./secrets";
+import rootRouter from "./routes";
+import { PrismaClient } from "@prisma/client";
 
 const app:Express = express();
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
+// Middleware to parse JSON bodies
+app.use(express.json());
+app.use('/api',rootRouter);
+
+export const prismaClient = new PrismaClient({
+    log: ['query', 'info', 'warn', 'error'],
 });
 
 app.listen(PORT, () => {
