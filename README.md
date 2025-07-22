@@ -33,3 +33,6 @@ Any time you modify the schema, you must run `npx prisma generate` again.
     bcrypt and jsonwebtoken - `npm i bcrypt jsonwebtoken`
     `npm i --save-dev @types/bcrypt`
     `npm i --save-dev @types/jsonwebtoken`
+
+--> To implement validation
+    `npm i zod`
