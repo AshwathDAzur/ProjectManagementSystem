@@ -9,8 +9,6 @@ import { UnprocessableEntity } from "../exceptions/validation";
 import { signupSchema } from "../schema/users";
 
 export const signup: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-
       signupSchema.parse(req.body); // Validate request body against the schema
       const { email, password, name } = req.body;
       let user = await prismaClient.user.findFirst({
@@ -30,34 +28,28 @@ export const signup: RequestHandler = async (req: Request, res: Response, next: 
         message: "User created successfully",
         user
       });
-
-  }
-  catch(err: any) {
-    next(new UnprocessableEntity(err?.issues, 'Unprocessable Entity', ErrorCodes.UNPROCESSABLE_ENTITY));
-  }
-  
 };
 
 export const signin: RequestHandler = async (req, res) => {
-  const { email, password } = req.body;
+      const { email, password } = req.body;
 
-  let user = await prismaClient.user.findFirst({
-    where: { email }
-  });
+      let user = await prismaClient.user.findFirst({
+        where: { email }
+      });
 
-  if (!user) {
-    throw Error("User does not exist");
-  }
-  if(!compareSync(password, user.password)) {
-    throw Error("Incorrect password"); 
-  }
-  const token = jwt.sign({
-    userId: user.id,
-  }, JWT_SECRET);
+      if (!user) {
+        throw Error("User does not exist");
+      }
+      if(!compareSync(password, user.password)) {
+        throw Error("Incorrect password"); 
+      }
+      const token = jwt.sign({
+        userId: user.id,
+      }, JWT_SECRET);
 
-  res.json({
-    message: "User signed in successfully",
-    user,
-    token
-  });
+      res.json({
+        message: "User signed in successfully",
+        user,
+        token
+      });
 };
