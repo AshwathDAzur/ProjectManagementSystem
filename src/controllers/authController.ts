@@ -5,7 +5,7 @@ import * as jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../secrets";
 import { BadRequestException } from "../exceptions/badRequest";
 import { ErrorCodes } from "../exceptions/root";
-import { UnprocessableEntity } from "../exceptions/validation";
+
 import { signupSchema } from "../schema/users";
 
 export const signup: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
@@ -52,4 +52,8 @@ export const signin: RequestHandler = async (req, res) => {
         user,
         token
       });
+};
+
+export const me: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+      res.json(req.user);
 };
